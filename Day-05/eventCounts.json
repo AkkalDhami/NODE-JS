@@ -1,0 +1,6 @@
+{
+  "user-login": 6,
+  "user-logout": 16,
+  "user-purchase": 17,
+  "profile-update": 18
+}
