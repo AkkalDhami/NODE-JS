@@ -65,6 +65,7 @@ readFileExample();
 
 //? path: The file path to read.
 //? options: Optional. Can specify encoding (e.g., 'utf8') or return a Buffer if no encoding is provided.
+
 //*-------------------------------------------------------------------------------------*
 
 const appendFileExample = async () => {
