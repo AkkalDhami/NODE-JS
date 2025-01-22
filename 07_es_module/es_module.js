@@ -2,6 +2,7 @@ import addition from "./app.js";
 import { subtract } from "./app.js";
 
 // import {product} from "./app.js";
+
 import { divide, factorial } from "./app.js"; //* we can import multiple export
 
 import * as app from "./app.js"; //* agregate import 
