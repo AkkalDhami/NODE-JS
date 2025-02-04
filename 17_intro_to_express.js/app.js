@@ -1,6 +1,6 @@
 //? Express.JS: s a minimal and flexible web application framework for Node.js.
 
-//?  It provides a robust set of featuresmfor building single - page,    multi page, and hybrid webapplications.
+//?  It provides a robust set of featuresmfor building single - page, multi page, and hybrid webapplications.
 
 //? Express.js simplifies server - side coding by providing a layer of fundamental web applicationfeatures.
 
