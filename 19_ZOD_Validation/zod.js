@@ -10,20 +10,20 @@ const ageSchema = z.number().min(18).max(100).int();
 const userAge = 19;
 
 const parseUserAge = ageSchema.parse(userAge);
-// const { data, error, success } = ageSchema.safeParse(userAge);
-// console.log(data, success, error);
+const { data, error, success } = ageSchema.safeParse(userAge);
+console.log(data, success, error);
 
 
-// try {
-//     const parseUserAge = ageSchema.parse(userAge);
-//     console.log(parseUserAge);
-// } catch (error) {
-//     if (error instanceof ZodError) {
-//         console.log(error.issues[0].message);
-//     } else {
-//         console.log("Error: ", error);
-//     }
-// }
+try {
+    const parseUserAge = ageSchema.parse(userAge);
+    console.log(parseUserAge);
+} catch (error) {
+    if (error instanceof ZodError) {
+        console.log(error.issues[0].message);
+    } else {
+        console.log("Error: ", error);
+    }
+}
 
 //? Object Validations:
 
@@ -81,6 +81,7 @@ const ageSchema2 = z.number().refine((age) => age % 2 === 0, {
 console.log(ageSchema2.safeParse(21).error?.errors[0].message); // Age must be even
 
 //? Parsing API Data
+
 //* Zod is useful for validating API responses:
 
 fetch("https://api.example.com/user")
