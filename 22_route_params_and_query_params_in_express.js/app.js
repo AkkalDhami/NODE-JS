@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 
 app.get("/profile/:username", (req, res) => {
     const username = req.params.username;
-    // console.log(username);
+    console.log(username);
     return res.send(`<h1>Welcome to our profile page ${username} </h1>`);
 });
 
