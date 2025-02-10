@@ -1,4 +1,4 @@
-import path from 'path'
+
 import express from 'express';
 
 const app = express();
@@ -13,14 +13,34 @@ console.log(data);
 console.log(import.meta.dirname);
 console.log(import.meta.filename);
 
-const staticPath = path.join(import.meta.dirname, "public");
-
-app.use("/public", express.static(staticPath));
 
 app.get("/", (req, res) => {
-    const homePath = path.join(import.meta.dirname, "public", "index.html");
-    return res.sendFile(homePath);
+    return res.send("<h1>Welcome to our home page </h1>");
 });
+
+
+app.get("/profile/:username", (req, res) => {
+    const username = req.params.username;
+    // console.log(username);
+    return res.send(`<h1>Welcome to our profile page ${username} </h1>`);
+});
+
+app.get("/profile/:username/article/:slug", (req, res) => {
+    const formattedURL = req.params.slug.replace(/-/g, " ");
+    return res.send(`
+       <h1>Welcome to our article page ${req.params.slug} ${formattedURL} </h1>
+        `);
+});
+
+
+app.get("/product", (req, res) => {
+    console.log(req.query.search)
+    return res.send(`
+        <h1>Welcome to our product page </h1>
+        <p> ${req.query.search} pageno: ${req.query.page} limit: ${req.query.limit} </p>
+        `);
+});
+
 
 const PORT = 3000;
 app.listen(PORT, () => {
