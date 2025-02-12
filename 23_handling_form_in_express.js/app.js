@@ -5,6 +5,7 @@ const app = express();
 const staticPath = path.join(import.meta.dirname, "public");
 
 app.use(express.urlencoded({ extended: true }));
+
 app.use("/contact", express.static(staticPath));
 
 app.get("/", (req, res) => {
@@ -27,12 +28,12 @@ app.use((req, res) => {
     return res.status(404).sendFile(path.join(import.meta.dirname, "views", "404.html"));
 })
 
-// app.use((req, res) => {
-//     return res.status(404).send(`
-//         <h1>404 Page Not Found</h1>
-//         <a href="/">Home</a>
-//         `);
-// })
+app.use((req, res) => {
+    return res.status(404).send(`
+        <h1>404 Page Not Found</h1>
+        <a href="/">Home</a>
+        `);
+})
 
 const PORT = 3000;
 app.listen(PORT, () => {
