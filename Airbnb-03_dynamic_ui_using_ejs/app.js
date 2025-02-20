@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(userRouter);
 app.use("/host", hostRouter);
 
+
 const staticPath = path.join(import.meta.dirname, "public");
 app.use(express.static(staticPath));
 
