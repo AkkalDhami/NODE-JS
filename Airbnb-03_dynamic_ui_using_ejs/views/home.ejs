@@ -1,46 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>airbnb Home</title>
-    <!-- <link rel="stylesheet" href="../public/home.css"> -->
-    <link rel="stylesheet" href="../public/stylesheets/output.css" />
-  </head>
-  <body class="px-8">
-    <header
-      class="bg-red-500 text-white p-8 shadow-md"
-      style="background-color: red"
-    >
-      <nav class="container mx-auto flex justify-between items-center">
-        <ul class="flex space-x-4">
-          <li>
-            <a
-              href="/"
-              class="hover:bg-red-400 py-2 px-4 rounded transition duration-300"
-              >Go to Home</a
-            >
-          </li>
-          <li>
-            <a
-              href="/host/add-home"
-              class="hover:bg-red-400 py-2 px-4 rounded transition duration-300"
-              >Add Home</a
-            >
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <h1 class="text-3xl font-bold">Welcome to airbnb</h1>
+  <%- include('partials/head') %>
+  <body class="min-h-screen w-full bg-gray-100">
+    <%- include('partials/nav') %>
+
+    <main class="p-6">
+      <h1 class="text-3xl font-bold mt-8 mb-3">Welcome to airbnb</h1>
       <a
         href="/host/add-home"
-        class="mt-8 text-gray-600 font-normal hover:text-red-500 py-2 px-4 rounded"
+        class="mt-11 text-gray-600 font-normal hover:text-red-500 py-2 rounded"
         >Add Home</a
       >
       <h1 class="text-2xl font-bold mt-8">Here are our homes</h1>
-      <ul class="mt-4">
-        <%= 2 + 2 %>
+      <ul class="mt-4 space-y-2">
+        <% registeredHomes.forEach(home => { %>
+        <li class="p-4 bg-white shadow rounded-lg">
+          <span class="text-lg font-semibold"><%= home.houseName %></span>
+        </li>
+        <% }) %>
       </ul>
     </main>
   </body>

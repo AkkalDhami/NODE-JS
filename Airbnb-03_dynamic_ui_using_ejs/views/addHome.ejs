@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Home to airbnb</title>
-    <link rel="stylesheet" href="../public/stylesheets/output.css" />
-  </head>
-  <body
-    class="flex justify-center items-center p-12 min-h-screen w-full bg-gray-100"
-  >
+  <%- include('partials/head') %>
+  <body class="min-h-screen w-full bg-gray-100">
+    <%- include('partials/nav') %>
+
     <main class="flex justify-center items-center p-12">
       <form
         action="/host/add-home"
@@ -25,12 +20,13 @@
             name="houseName"
             id="houseName"
             placeholder="Enter the name of your house"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+            required
           />
         </div>
         <button
           type="submit"
-          class="w-full cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+          class="w-full cursor-pointer bg-orange-500 text-blue-500 py-2 rounded-lg hover:bg-orange-600 transition duration-300"
         >
           Submit
         </button>
