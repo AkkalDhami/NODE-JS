@@ -10,7 +10,9 @@ import { rootDir } from './utils/pathUtils.js'
 
 const app = express();
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
+
 app.use(userRouter);
 app.use("/host", hostRouter);
 
@@ -27,6 +29,7 @@ app.use((req, res, next) => {
 })
 
 const PORT = 3000;
+
 app.listen(PORT, () => {
   console.log(`Server running on address http://localhost:${PORT}`);
 });
