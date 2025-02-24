@@ -145,7 +145,7 @@ app.listen(PORT, () => {
    import express from 'express';
    ```
    This line imports the Express module, which is used to create the Express application.
-
+      
 2. **Create an Express Application:**
    ```javascript
    const app = express();
