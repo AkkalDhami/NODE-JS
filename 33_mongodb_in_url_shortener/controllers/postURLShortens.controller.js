@@ -39,7 +39,6 @@ export const reDirectToShortLinks = async (req, res) => {
 
         if (!link) return res.status(404).send("404 error occurred");
 
-
         return res.redirect(link.url);
     } catch (err) {
         console.error(err);
