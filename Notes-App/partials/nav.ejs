@@ -3,7 +3,7 @@
         <div class="flex justify-between h-16">
             <div class="flex items-center space-x-4">
                 <span class="text-xl font-bold text-blue-600">📝 NotesApp</span>
-                <a href="/"  class="text-gray-700 hover:text-blue-600 <%= currentPage === 'index'  ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-700' %>">Home</a>
+                <a href="/"  class="hover:text-blue-600 <%= currentPage === 'index'  ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-700' %>">Home</a>
                 <a href="my-notes" class=" <%= currentPage === 'my-notes' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-700'  %> hover:text-blue-600">My Notes</a>
             </div>
             <!-- Mobile Hamburger -->
@@ -18,10 +18,4 @@
         </div>
     </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden px-4 pb-4">
-        <a href="/" class="block text-gray-700 py-2 hover:text-blue-600">Home</a>
-        <a href="my-notes" class="block text-gray-700 py-2 hover:text-blue-600">My Notes</a>
-        <a href="/" class="block text-gray-700 py-2 hover:text-blue-600">Create</a>
-    </div>
 </nav>
