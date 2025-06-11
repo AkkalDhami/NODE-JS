@@ -11,6 +11,7 @@ export const getAllNotes = async (req, res) => {
         currentPage: "my-notes"
     });
 }
+
 export const editNote = async (req, res) => {
     try {
         const note = await Note.findById(req.params.id);
