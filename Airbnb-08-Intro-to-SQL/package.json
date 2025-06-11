@@ -1,0 +1,21 @@
+{
+  "name": "airbnb-03_dynamic_ui_using_ejs",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tailwind": "tailwindcss -i ./views/input.css -o ./public/stylesheets/output.css --watch",
+    "start": "nodemon app.js & npm run tailwind"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "mysql2": "^3.14.1",
+    "tailwindcss": "^4.0.7"
+  }
+}
