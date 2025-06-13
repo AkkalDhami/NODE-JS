@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+
+  <body class="min-h-screen w-full bg-gray-100">
+    <%- include('../partials/nav') %>
+
+      <main class="p-6">
+
+        <h1 class="text-3xl mb-4 text-center font-bold mt-8">Welcome to AirBnb</h1>
+        <div class="homes  mt-6 space-y-2 grid-cols-1 md:grid-cols-2 grid lg:grid-cols-4 gap-5">
+          <% registeredHomes.forEach(home=> { %>
+            <div
+              class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 w-full max-w-sm group">
+              <img src="https://th.bing.com/th/id/OIP.wOKG8t4WxjwXOTVs75cm9AHaFQ?w=228&h=180&c=7&r=0&o=7&cb=iwp2&dpr=1.3&pid=1.7&rm=3" alt="<%= home.houseName %>"
+                class="w-full h-48 object-cover group-hover:scale-105 transition duration-300" />
+
+              <div class="p-4">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                  <%= home.houseName %>
+                </h3>
+                <p class="text-gray-600 mb-2">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <%= home.location %>
+                </p>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-lg font-semibold text-red-500">Rs<%= home.price %> | night</span>
+                  <div class="flex gap-3 items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                      class="w-6 h-6 text-yellow-400 mr-1">
+                      <path fill-rule="evenodd"
+                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                        clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-gray-700"> | <%= home.rating %></span>
+                    <button class="bg-green-600 px-3 py-2 rounded-lg text-white hover:bg-green-500"">Book Now</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+      </main>
+  </body>
+
+</html>
