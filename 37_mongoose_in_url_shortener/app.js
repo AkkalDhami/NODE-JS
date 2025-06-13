@@ -11,7 +11,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use("/", shortnerRoutes);
 
-const PORT = 3002
+const PORT = 2002
 
 await connectDB();
 app.listen(PORT, () => {
