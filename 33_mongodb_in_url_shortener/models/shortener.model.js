@@ -13,3 +13,6 @@ export const saveLinks = async (links) => {
 export const getLinkByShortCode = async (shortCode) => {
     return await shortenerCollections.findOne({ shortCode: shortCode });
 };
+export const deleteURL = async (shortCode) => {
+    return await shortenerCollections.deleteOne({ shortCode: shortCode });
+}
