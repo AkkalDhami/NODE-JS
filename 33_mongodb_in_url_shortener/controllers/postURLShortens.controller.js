@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { loadLinks, saveLinks, getLinkByShortCode } from "../models/shortener.model.js";
+import { loadLinks, saveLinks, getLinkByShortCode, deleteURL } from "../models/shortener.model.js";
 export const getShortenerPage = async (req, res) => {
     try {
         const links = await loadLinks();
@@ -45,3 +45,14 @@ export const reDirectToShortLinks = async (req, res) => {
         return res.status(500).send("Internal server error");
     }
 };
+
+export const deleteLink = async (req, res) => {
+    try {
+        const { shortCode } = req.params;
+        await deleteURL(shortCode);
+        return res.redirect("/");
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send("Internal server error");
+    }
+}
