@@ -19,10 +19,10 @@ export const postURLShortener = async (req, res) => {
 
         const links = await Url.find();
 
-        if (links[finalShortCode]) {
-            return res
-                .status(400)
-                .send("Short code already exists. Please choose another.");
+        const existingLink = links.find((link) => link.shortCode === finalShortCode);
+            
+        if (existingLink) {
+            return res.status(400).send("Short code already exists. Please choose another.");
         }
 
         await Url.create({
@@ -45,6 +45,16 @@ export const reDirectToShortLinks = async (req, res) => {
         if (!link) return res.status(404).send("404 error occurred");
 
         return res.redirect(link.url);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send("Internal server error");
+    }
+};
+export const deleteShortLink = async (req, res) => {
+    try {
+        const { shortCode } = req.params;
+        await Url.deleteOne({ shortCode });
+        return res.redirect("/");   
     } catch (err) {
         console.error(err);
         return res.status(500).send("Internal server error");
