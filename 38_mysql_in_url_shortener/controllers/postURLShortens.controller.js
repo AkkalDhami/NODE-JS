@@ -31,7 +31,7 @@ export const postURLShortener = async (req, res) => {
         return res.redirect("/");
     } catch (error) {
         console.error(error);
-        return res.status(500).send("Internal server error");
+        return res.status(500).send(error.message);
     }
 };
 
