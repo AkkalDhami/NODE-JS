@@ -1,38 +1,19 @@
-import fs from 'fs';
-import path from 'path';
-import { rootDir } from '../utils/pathUtils.js';
 
-const favouriteDataPath = path.join(rootDir, "data", "favourite.json");
+import { pool as db } from '../utils/databaseUtils.js';
 
 export default class Favourite {
-    static addToFavourites(homeId, callback) {
-        Favourite.getFavourites(favourites => {
-            if (!favourites.includes(homeId)) {
-                favourites.push(homeId);
-                fs.writeFile(favouriteDataPath, JSON.stringify(favourites), (err) => {
-                    console.log("Favourite added, ", err);
-                    callback(!err);
-                });
-            } else {
-                console.log("Home already in favourites");
-                callback('Home already in favourites');
-            }
-        });
+    constructor(homeId) {
+        this.homeId = homeId;
     }
-    static getFavourites(callback) {
-        fs.readFile(favouriteDataPath, (err, data) => {
-            callback(!err ? JSON.parse(data) : []);
-        });
-        console.log("Favourites fetched...");
+    static addToFavourites(homeId) {
+        console.log("Adding to favourites: ", homeId);
+        return db.execute('INSERT INTO favourites (homeId) VALUES (?)', [homeId]);
     }
-    static removeFromFavourites(delHomeId, callback) {
-        Favourite.getFavourites(homeIds => {
-            console.log(homeIds, delHomeId);
-            homeIds = homeIds.filter(homeId => homeId !== delHomeId);
-            console.log(homeIds);
-            fs.writeFile(favouriteDataPath, JSON.stringify(homeIds), callback);
-        });
+    static getFavourites() {
+        return db.execute('SELECT homeId FROM favourites');
     }
-
-
+    static removeFromFavourites(delHomeId) {
+        console.log("Removing from favourites: ", delHomeId);
+        return db.execute('DELETE FROM favourites WHERE homeId = ?', [delHomeId]);
+    }
 }
