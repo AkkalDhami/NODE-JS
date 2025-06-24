@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+
+<body>
+
+    <div>
+        <h2>URL Shortener</h2>
+        <form action="/url/shorten" method="POST">
+            <input type="text" name="redirectUrl" placeholder="Enter URL to shorten" required>
+            <button type="submit">Shorten URL</button>
+        </form>
+    </div>
+
+    <h2>Shortened URLs</h2>
+    <p>Here are the URLs you have shortened:</p>
+    
+    <% if (urls) { %>
+    
+        <table border="1" cellpadding="5" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>#SN.</th>
+                    <th>Short ID</th>
+                    <th>Original URL</th>
+                    <th>Created At</th>
+                    <th>Total Visits</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% urls.forEach((url) => { %>
+                <tr>
+                    <td><%= urls.indexOf(url) + 1 %></td>
+                    <td><a target="_blank" href="/<%= url.shortId %>"><%= url.shortId %></a></td>
+                    <td><%= url.redirectUrl %></td>
+                    <td><%= new Date(url.createdAt).toLocaleString() %></td>
+                    <td><%= url.visitHistory.length %></td>
+                    <td>
+                        <form action="/url/<%= url.shortId %>/delete" method="POST" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+    <% } %>
+    
+
+</body>
+
+</html>
