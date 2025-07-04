@@ -1,0 +1,32 @@
+{
+  "name": "43_auth_in_urlshortener",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css": "npx @tailwindcss/cli -i ./public/styles/input.css -o ./public/styles/output.css --watch",
+    "start": "nodemon app.js",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:generate": "npx drizzle-kit generate",
+    "db:studio": "npx drizzle-kit studio"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.10",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.5.0",
+    "drizzle-orm": "^0.44.2",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mysql2": "^2.3.3",
+    "nodemon": "^3.1.10",
+    "tailwindcss": "^4.1.10"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.2"
+  }
+}
