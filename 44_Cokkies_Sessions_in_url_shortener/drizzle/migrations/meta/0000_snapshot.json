@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "6c9f6ee0-3d2c-401e-bc97-8820f705e66d",
+  "id": "5f9a36af-17fe-4ff8-aac9-e58dfcd68808",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "shortLinks": {
@@ -30,11 +30,11 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "datetime",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "CURRENT_TIMESTAMP"
+          "default": "(now())"
         }
       },
       "indexes": {},
@@ -90,19 +90,20 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "datetime",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "CURRENT_TIMESTAMP"
+          "default": "(now())"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "datetime",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "CURRENT_TIMESTAMP"
+          "onUpdate": true,
+          "default": "(now())"
         }
       },
       "indexes": {},
