@@ -1,8 +1,6 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import authRoutes from './routes/authRoute.js';
-// import { shortnerRoutes } from './routes/shortURLRoute.js';
-
+import { authRoutes } from './routes/authRoutes.js';
 
 const app = express();
 
@@ -12,16 +10,12 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
-
-// app.use('/', shortnerRoutes);
 app.use('/auth', authRoutes);
 
-
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
     let isLoggedIn = req.cookies.isLoggedIn;
-    console.log('Cookies: ', req.cookies.isLoggedIn)
     res.render('index', { title: 'Url Shortener', isLoggedIn });
 })
 
