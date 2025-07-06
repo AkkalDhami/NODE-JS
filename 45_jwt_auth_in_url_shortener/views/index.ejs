@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <%- include('partials/nav') %>
+    <main class="flex-grow pt-24">
+      <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div class="container">
+          <h1>URL Shortener</h1>
+
+          <!-- logged in message -->
+          <% if (user) { %>
+            <p class="text-green-500">You are logged in as <strong>
+                <%= user.id.name %>
+              </strong></p>
+            <% } else { %>
+              <p class="text-red-500">You are not logged in</p>
+            <% } %>
+
+              <form action="/shorten" method="POST" class="space-y-4">
+                <div>
+                  <label for="url" class="block text-sm font-medium text-gray-700 mb-1">
+                    <i class="ri-link mr-2"></i> Enter URL:
+                  </label>
+                  <input type="url" id="url" name="url" required
+                    class="w-full px-4 py-2 outline-0 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder="https://example.com">
+                </div>
+
+                <div>
+                  <label for="shortCode" class="block text-sm font-medium text-gray-700 mb-1">
+                    <i class="ri-code-s-slash-line mr-2"></i> Enter short code:
+                  </label>
+                  <div class="flex rounded-md shadow-sm">
+
+                    <input type="text" id="shortCode" name="shortCode" pattern="[a-zA-Z0-9-_]+" maxlength="20"
+                      class="w-full px-4 py-2 outline-0 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      placeholder="example">
+                  </div>
+                </div>
+
+                <button type="submit"
+                  class="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  <i class="ri-scissors-cut-line mr-2"></i> Shorten
+                </button>
+              </form>
+
+              <h2>Shortened URLs</h2>
+              <ul>
+                <% links.map(({shortCode, url})=> { %> <% const truncatedUrl=url.length>= 30 ?
+                    `${url.slice(0,30)}...` : url %>
+
+                    <li>
+                      <a href="/<%= shortCode %>" target="_blank">
+                        <%= host %>/<%= shortCode %>
+                      </a>
+                      - <%= truncatedUrl %>
+                        <a href="/delete/<%= shortCode %>">Delete</a>
+                    </li>
+                    <% })%>
+              </ul>
+        </div>
+      </div>
+    </main>
+</body>
+
+</html>
