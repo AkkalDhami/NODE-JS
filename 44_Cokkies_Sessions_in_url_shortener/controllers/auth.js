@@ -47,16 +47,16 @@ export const postRegister = async (req, res) => {
     const { name, email, password, confirmPassword } = req.body;
     console.log(req.body);
 
-    // try {
-    //     const userExists = await getUserByEmail(email);
-    //     if (userExists) {
-    //         console.log('User already exists:', userExists);
-    //         return res.redirect('/auth/register');
-    //     }
+    try {
+        const userExists = await getUserByEmail(email);
+        if (userExists) {
+            console.log('User already exists:', userExists);
+            return res.redirect('/auth/register');
+        }
         
-    // } catch (error) {
-    //     console.error('Error during registration:', error);
-    //     return res.redirect('/auth/register');
-    // }
+    } catch (error) {
+        console.error('Error during registration:', error);
+        return res.redirect('/auth/register');
+    }
     res.redirect('/auth/login');
 }
