@@ -29,6 +29,7 @@ app.use(flash());
 app.use(requestIp.mw());
 
 app.use(verifyAuthentication);
+
 app.use((req, res, next) => {
   res.locals.user = req.user;
   return next();
