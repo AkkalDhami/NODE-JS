@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1751694780626,
+      "tag": "0000_tearful_winter_soldier",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1751696018152,
+      "tag": "0001_numerous_wrecker",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1751769721502,
+      "tag": "0002_cuddly_namorita",
+      "breakpoints": true
+    }
+  ]
+}
