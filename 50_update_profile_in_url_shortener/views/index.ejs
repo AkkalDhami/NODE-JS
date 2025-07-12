@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+</head>
+
+<body class="bg-zinc-50 min-h-screen font-medium flex flex-col">
+  <%- include('partials/nav') %>
+    <main class="flex-grow pt-16">
+      <div class="max-w-3xl mx-auto p-8">
+        <!-- Auth status -->
+        <% if (user) { %>
+          <div class="flex items-center max-w-[300px] bg-green-100 rounded-lg p-3 mb-6">
+            <i class="ri-checkbox-circle-fill text-green-500 text-xl mr-2"></i>
+            <span class="text-green-600">You're logged in</span>
+          </div>
+          <% } else { %>
+            <div class="flex items-center bg-amber-100 rounded-lg p-3 mb-6">
+              <i class="ri-alert-fill text-amber-500 text-xl mr-2"></i>
+              <span class="text-amber-600">You're not logged in</span>
+              <a href="/login" class="ml-auto text-sm text-indigo-600 hover:underline">Sign in</a>
+            </div>
+            <% } %>
+              <div class="mb-8">
+                <h1 class="text-3xl font-bold text-zinc-800 mb-2">URL Shortener</h1>
+              </div>
+
+              <!-- Shorten Form -->
+              <form action="/shorten" method="POST" class="space-y-5 mb-8">
+                <div class="space-y-1">
+                  <label for="url" class=" text-[16px] font-medium text-zinc-700 flex items-center">
+                    <i class="ri-link mr-2"></i> Destination URL
+                  </label>
+                  <div class="relative">
+                    <input type="text" id="url" name="url"
+                      class="w-full pl-10 pr-4 py-3 outline-0 border border-zinc-200 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                      placeholder="https://example.com">
+                    <i class="ri-earth-line absolute left-3 top-3.5 text-zinc-400"></i>
+                  </div>
+                </div>
+
+                <div class="space-y-1">
+                  <label for="shortCode" class=" text-[16px] font-medium text-zinc-700 flex items-center">
+                    <i class="ri-code-line mr-2"></i> Short Code
+                  </label>
+
+                  <div class="relative">
+                    <input type="text" maxlength="20" id="shortCode" name="shortCode"
+                      class="w-full pl-10 pr-4 py-3 outline-0 border border-zinc-200 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                      placeholder="mylink">
+                    <i class="ri-code-line text-lg absolute left-3 top-3.5 text-zinc-400"></i>
+                  </div>
+                </div>
+
+                <div class="error">
+                  <%- include('partials/error') %>
+                </div>
+
+                <button type="submit"
+                  class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all">
+                  Create Short Link
+                </button>
+              </form>
+
+              <!-- Shortened URLs -->
+              <div class="border-t border-zinc-100 pt-6">
+                <div class="flex items-center justify-between mb-4">
+                  <h2 class="text-xl font-semibold text-zinc-800 flex items-center">
+                    <i class="ri-links-line mr-2"></i> Your Links
+                  </h2>
+                  <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                    <%= links.length %> total
+                  </span>
+                </div>
+
+                <% if (links.length> 0) { %>
+                  <ul class="space-y-3 max-h-[400px] overflow-y-auto">
+                    <% links.forEach((link)=> { %>
+                      <li class="bg-zinc-50 border-b border-zinc-300 p-4 transition-all">
+                        <div class="flex items-start justify-between">
+                          <div class="flex-1 min-w-0">
+
+                            <a href="/<%= link.shortCode %>" target="_blank"
+                              class="font-medium text-indigo-600 hover:underline truncate mr-2">
+                              <%= host %>/<%= link.shortCode %>
+                            </a>
+
+                            <p class="text-sm text-zinc-600 truncate">
+                              <%= link.url %>
+                            </p>
+                            <div class="flex items-center mt-2 text-xs text-zinc-500">
+                              <i class="ri-calendar-line mr-1"></i>
+                              <span>Created <%= formatDate(link.createdAt) %></span>
+                              <span class="mx-2">•</span>
+                              <i class="ri-bar-chart-line mr-1"></i>
+                              <span>
+                                <%= link.totalClicks %> clicks
+                              </span>
+                            </div>
+                          </div>
+                          <div class="flex items-center flex-col">
+                            <button onclick="copyToClipboard('<%= host %>/<%= link.shortCode %>')"
+                              class="text-zinc-400 hover:text-indigo-500">
+                              <i class="ri-file-copy-line"></i>
+                            </button>
+                            <a href="/delete/<%= link.id %>" class="text-red-400 hover:text-red-600 p-1">
+                              <i class="ri-delete-bin-6-line"></i>
+                            </a>
+                            <!-- edit -->
+                            <a href="/edit/<%= link.id %>" class="text-zinc-400 hover:text-indigo-500 p-1">
+                              <i class="ri-edit-line"></i>
+                            </a>
+                          </div>
+
+                        </div>
+                      </li>
+                      <% }); %>
+                  </ul>
+                  <% } else { %>
+                    <div class="text-center py-8">
+                      <i class="ri-links-line text-4xl text-zinc-300 mb-3"></i>
+                      <p class="text-zinc-500">No shortened links yet</p>
+                    </div>
+                    <% } %>
+              </div>
+      </div>
+    </main>
+    <script>
+      function copyToClipboard(text) {
+        navigator.clipboard.writeText(text);
+        alert('Copied to clipboard: ' + text);
+      }
+    </script>
+
+</body>
+
+</html>
