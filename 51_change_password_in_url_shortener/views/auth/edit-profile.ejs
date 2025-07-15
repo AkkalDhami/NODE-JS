@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') %>
+</head>
+
+<body class="bg-zinc-50 min-h-screen font-medium flex flex-col">
+    <%- include('../partials/nav') %>
+        <main class="flex-grow pt-16">
+            <div class="max-w-3xl mx-auto p-8">
+                <!-- Auth status -->
+                <% if (user) { %>
+                    <div class="flex items-center max-w-[300px] bg-green-100 rounded-lg p-3 mb-6">
+                        <i class="ri-checkbox-circle-fill text-green-500 text-xl mr-2"></i>
+                        <span class="text-green-600">You're logged in</span>
+                    </div>
+                    <% } else { %>
+                        <div class="flex items-center bg-amber-100 rounded-lg p-3 mb-6">
+                            <i class="ri-alert-fill text-amber-500 text-xl mr-2"></i>
+                            <span class="text-amber-600">You're not logged in</span>
+                            <a href="/login" class="ml-auto text-sm text-indigo-600 hover:underline">Sign in</a>
+                        </div>
+                        <% } %>
+                            <div class="mb-8">
+                                <h1 class="text-3xl font-bold text-zinc-800 mb-2">Edit Your Profile</h1>
+                            </div>
+
+                            <!-- Shorten Form -->
+                            <form action="/auth/edit-profile" method="POST" class="space-y-5 mb-8">
+                                <div class="space-y-1">
+                                    <label for="name" class=" text-[16px] font-medium text-zinc-700 flex items-center">
+                                        <i class="ri-user-3-line mr-2"></i> Your Name
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text"  id="name" name="name" value="<%= user.name %>"
+                                            class="w-full pl-10 pr-4 py-3 outline-0 border border-zinc-200 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
+                                        <i class="ri-user-line absolute left-3 top-3.5 text-zinc-400"></i>
+                                    </div>
+                                </div>
+
+                                <div class="error">
+                                    <%- include('../partials/error') %>
+                                </div>
+
+                                <button type="submit"
+                                    class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all">
+                                    Update Profile
+                                </button>
+                            </form>
+
+            </div>
+        </main>
+
+
+</body>
+
+</html>
